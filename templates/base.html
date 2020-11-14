@@ -17,17 +17,17 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">myBooksReviews</a>
+                <a class="navbar-brand" href="{{ url_for('get_reviews') }}">myBooksReviews</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <a class="nav-link" href="#">Reviews </a>
-                        <a class="nav-link" href="#">MyReviews</a>
-                        <a class="nav-link" href="#">Profile</a>
-                        <a class="nav-link" href="#">Sign In</a>
-                        <a class="nav-link" href="#">Sign Out</a>
+                        <a class="nav-link" href="{{ url_for('get_reviews') }}">Reviews </a>
+                        <a class="nav-link" href="{{ url_for('get_myreviews') }}">MyReviews</a>
+                        <a class="nav-link" href="{{ url_for('get_profile') }}">Profile</a>
+                        <a class="nav-link" href="{{ url_for('get_login') }}">Log In</a>
+                        <a class="nav-link" href="{{ url_for('get_logout') }}">Log Out</a>
                     </div>
                 </div>
             </nav>
@@ -39,17 +39,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        {% for users in users %}
-                            {{ users.first_name }} <br>
-                            {{ users.last_name }} <br>
-                            {{ users.created }} <br>
-                            {{ users.about }} <br>
-                            {{ users.email }} <br>
-                            {{ users.username }} <br>
-                            {{ users.password }} <br>
-                            {{ users.country }} <br>
-                            {{ users.active }} <br>
-                        {% endfor %}
+                        {% block content %}
+                            
+                        {% endblock %}
                     </div>
                 </div>
             </div>
