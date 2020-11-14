@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Profile</h2>
+    {% for users in users %}
+        {{ users.first_name }} <br>
+        {{ users.last_name }} <br>
+        {{ users.created }} <br>
+        {{ users.about }} <br>
+        {{ users.email }} <br>
+        {{ users.username }} <br>
+        {{ users.password }} <br>
+        {{ users.country }} <br>
+        {{ users.active }} <br>
+    {% endfor %}
+{% endblock %}
