@@ -24,7 +24,28 @@ mongo = PyMongo(app)
 @app.route("/reviews")
 def get_reviews():
     users = mongo.db.users.find()
-    return render_template("base.html", users=users)
+    return render_template("reviews.html", users=users)
+
+
+@app.route("/myreviews")
+def get_myreviews():
+    return render_template("myreviews.html")
+
+
+@app.route("/profile")
+def get_profile():
+    users = mongo.db.users.find()
+    return render_template("profile.html", users=users)
+
+
+@app.route("/login")
+def get_login():
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def get_logout():
+    return render_template("logout.html")
 
 
 if __name__ == "__main__":
