@@ -1,6 +1,60 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Profile</h2>
+    <div class="profile-container">
+        <h2 class="text-4">Profile</h2>
+        <div class="col-sm-6 mx-auto profile">
+            <div class="row">
+                <div class="d-flex">
+                    <div class="col-sm-6 x-auto">
+                        <img src="https://www.clipartkey.com/mpngs/b/301-3011907_helping-the-poor-and-needy-clipart.png" alt="Profile Image" height="160px" width="160px">
+                    </div>
+                    <div class="col-sm-6 d-block mx-auto">
+                        <h4>User Name</h4>
+                        <h6>user</h6>
+                        <p>Email: </p>
+                        <p>Country: </p>
+                        <p>Member Since: </p>  
+                    </div>
+                </div>
+
+                <!-- Form containing user profile information -->
+                <form class="mt-1 col-sm-12">
+                    <!-- First Name and Last Name fields -->
+                    <div class="form-group ">
+                        <!-- First Name Field  -->
+                        <div class="form-group col-sm-12 mx-auto">
+                            <label for="fname">First Name</label>
+                            <input type="text" id="fname" name="fname" class="form-control" required>
+                        </div>
+                        <!-- Last Name Field  -->
+                        <div class="form-group col-sm-12 mx-auto">
+                            <label for="lname">Last Name</label>
+                            <input type="text" id="lname" name="lname" class="form-control col-sm-12" required>
+                        </div>
+                    </div>
+
+                    <!-- Username and Password fields  -->
+                    <div class="form-group">
+                        <div class="form-group col-sm-12 mx-auto">
+                            <label for="uname">Username</label>
+                            <input type="text" id="uname" name="uname" class="form-control" required>
+                        </div> 
+                        <div class="form-group col-sm-12 mx-auto">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                    </div> 
+                    <div class="form-group col-sm-12 mx-auto">
+                        <label for="about">About Me</label>
+                        <textarea name="about" id="about" cols="30" rows="3" class="form-control" aria-required=""></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary d-flex mx-auto">Save Changes</button>
+                </form>
+                <div class="notification">
+                </div>
+            </div>
+        </div>
+    </div>
     {% for users in users %}
         {{ users.first_name }} <br>
         {{ users.last_name }} <br>
