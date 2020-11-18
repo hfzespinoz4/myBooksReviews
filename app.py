@@ -23,12 +23,13 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/reviews")
 def get_reviews():
-    users = mongo.db.users.find()
-    return render_template("reviews.html", users=users)
+    reviews = mongo.db.reviews.find()
+    return render_template("reviews.html", reviews=reviews)
 
 
 @app.route("/myreviews")
 def get_myreviews():
+    reviews = mongo.db.reviews.find()
     return render_template("myreviews.html")
 
 
