@@ -2,24 +2,21 @@
 {% block content %}
     <div class="profile-container">
         <h2 class="text-4 text-center">Profile</h2>
-        <div class="col-sm-6 mx-auto profile">
-            <div class="col-sm-12 mx-auto d-flex">
-                <div class="col-sm-12 col-md-6 d-flex">
-                    <img src="https://www.clipartkey.com/mpngs/b/301-3011907_helping-the-poor-and-needy-clipart.png" alt="Profile Image" height="160px" width="160px">
-                </div>
-                <div class="col-sm-12 col-md-6 d-flex">
-                    <div class="d-block">
-                        <h4>User Name</h4>
-                        <h6>user</h6>
-                        <p>Email: </p>
-                        <p>Country: </p>
-                        <p>Member Since: </p> 
-                    </div>
+        <div class="col-sm-12 col-md-8 mx-auto profile">
+            <div class="pt-2">
+                <img class="d-flex col-sm-5 mx-auto" src="https://www.clipartkey.com/mpngs/b/301-3011907_helping-the-poor-and-needy-clipart.png" alt="Profile Image" height="160px" width="160px">
+                <div class="col-sm-12 mx-auto">
+                    <h4 class="text-center profile-element">User Name</h4>
+                    <h6 class="text-center profile-element">user</h6>
+                    <p class="text-center profile-element">Email: </p>
+                    <p class="text-center profile-element">Country: </p>
+                    <p class="text-center profile-element">Member Since: </p> 
                 </div>
             </div>
-            <div class="row">
+            
                 
-
+      
+            <div class="row">
                 <!-- Form containing user profile information -->
                 <form class="mt-1 col-sm-12">
                     <!-- About Me Field  -->
@@ -31,31 +28,34 @@
                     <!-- First Name Field  -->
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="fname" class="col-sm-3">First Name:</label>
-                        <input type="text" id="fname" name="fname" class="form-control col-sm-9 col-md-12" required>
+                        <input type="text" id="fname" name="fname" class="form-control" required>
                     </div>
 
-                     <!-- Last Name Field  -->
+                    <!-- Last Name Field  -->
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="lname" class="col-sm-3">Last Name:</label>
-                        <input type="text" id="lname" name="lname" class="form-control col-sm-9 col-md-12" required>
+                        <input type="text" id="lname" name="lname" class="form-control" required>
                     </div>
                        
                     <!-- Username Field  -->
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="uname" class="col-sm-3">Username:</label>
-                        <input type="text" id="uname" name="uname" class="form-control col-sm-9" required>
+                        <input type="text" id="uname" name="uname" class="form-control" required>
                     </div>  
                     
-
                     <!-- Password Field  -->
-                    <div class="form-group col-sm-12 mx-auto d-flex">
+                    <div class="form-group col-sm-12 mx-auto">
                         <label for="password" class="col-sm-3">Password:</label>
-                        <input type="password" id="password" name="password" class="form-control col-sm-9" required>
+                        <input type="password" id="password" name="password" class="form-control" required>
                     </div>
                     <button type="submit" class="btn btn-primary d-flex mx-auto">Save Changes</button>
+                    <br>
                 </form>
-                <div class="notification">
+                <div class="pt-2 pb-2">
+                    <div class="notification my-auto">
+                    </div>
                 </div>
+                <div class="row"></div>  
             </div>
         </div>
     </div>  
