@@ -12,9 +12,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
         <title>MyBooksReviews </title>
         {% block styles %}
-            .card-element{
-            margin: 0;
-            }
+          
         {% endblock %}
     </head>
     <body>
@@ -29,6 +27,7 @@
                         <a class="nav-link" href="{{ url_for('get_reviews') }}">Reviews </a>
                         <a class="nav-link" href="{{ url_for('get_myreviews') }}">MyReviews</a>
                         <a class="nav-link" href="{{ url_for('get_profile') }}">Profile</a>
+                        <a class="nav-link" href="{{ url_for('get_register') }}">Register</a>
                         <a class="nav-link" href="{{ url_for('get_login') }}">Log In</a>
                         <a class="nav-link" href="{{ url_for('get_logout') }}">Log Out</a>
                     </div>
@@ -36,7 +35,15 @@
             </nav>
         </header>
         <section>
-
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning text-center" role="alert">
+                             {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         </section>
         <main>
             <div class="container">
@@ -75,38 +82,6 @@
                             </a>
                         </li>
                     </ul>
-                </div>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BookInfoModal">
-                Book Info
-                </button>
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BookReviewModal">
-                Review
-                </button>
-
-                <!-- Modal For Book Info -->
-                <div class="modal fade" id="BookInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ reviews.title }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Review by: {{ reviews.user }} </p>
-                                <p>Created: {{ reviews.creation_date}}</p>
-                                <p>Last Modified: {{ reviews.last_mod }}</p>
-                                <br>
-                                <cite>{{ reviews.review }}</cite>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </footer>

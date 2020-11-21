@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="display-4 text-center">Register</h1>
+    <div class="col-sm-8 mt-3 mx-auto">
+        <form class="col-sm-12 profile card" method="POST" action="{{ url_for('get_register') }}">
+            <div class="form-group">
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" name="register-email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="register-username">Username: </label>
+                <input type="text" id="register-username" name="register-username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="register-password">password:</label>
+                <input type="password:" id="register-password" name="register-password" class="form-control" minlength="5"
+                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
+            </div>
+            <div class="form-group">
+                <label for="register-passwordval">Repeat Your Password:</label>
+                <input type="password" id="register-passwordval" name="register-passwordval" class="form-control" minlength="5"
+                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
+            </div>
+            <br>    
+            <input type="submit" value="Register" class="form-control">
+            <br>
+        </form>
+        <br>
+    </div>
+{% endblock %}
