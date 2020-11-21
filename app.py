@@ -40,11 +40,6 @@ def get_profile():
     return render_template("profile.html", users=users)
 
 
-@app.route("/login")
-def get_login():
-    return render_template("login.html")
-
-
 @app.route("/logout")
 def get_logout():
     return render_template("logout.html")
@@ -73,6 +68,29 @@ def get_register():
         flash("Registration Succesful")
     return render_template("register.html")
 
+
+@app.route("/login", methods=["GET", "POST"])
+def get_login():
+    if request.method == "POST":
+        # Verifiy if username is registered in mongodb
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("login-username")})
+
+        if existing_user:
+            # Verify hashed password matches with db record
+            if check_password_hash(
+                existing_user["password"], request.form.get("login-password")):
+                    session["user"] = request.form.get("login-username").lower()
+                    flash("Welcome, {}" .format(request.form.get("login-username")))
+            else:
+                # Invalid Password
+                flash("Incorrect Username and/or Password, please verify")
+                return redirect(url_for("get_login"))        
+        else:
+            # usernae doesn´t exist
+            flash ("Incorrect Username and/or Password, please verify")
+            return redirect(url_for("get_login"))
+    return render_template("login.html")
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
