@@ -1,84 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
     <h1 class="text-center">Reviews</h1>
+   
     <br>
-    <form class="mx-auto col-sm-12 col-md-8">
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        <br>
-        <button class="btn btn-outline-success my-2 my-sm-0 text-center d-flex mx-auto" type="submit">Search!</button>
-    </form>
-    <br>
-    <div class="mt-2">
-    {% for reviews in reviews %}
-        <div class="col-sm-12 col-md-3 card">
-            <img src="{{ reviews.cover }}" alt="Book Cover" height="250rem" width="100%">
-            <div class="mx-auto">
-                <h4 class="text-center card-text">{{ reviews.title }}</h4>
-                <h5 class="text-center card-text">{{ reviews.author }}</h5>
-                <p class="mx-auto card-text">Review by: {{ reviews.user }} </p>
-                <p class="mx-auto card-text">Created: {{ reviews.creation_date }}</p>
-            </div>
-            <br>
-            <div class="mx-auto">
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BookInfoModal">
-                Book Info
-                </button>
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BookReviewModal">
-                Review
-                </button>
-
-                <!-- Modal For Book Info -->
-                <div class="modal fade" id="BookInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ reviews.title }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Review by: {{ reviews.user }} </p>
-                                <p>Created: {{ reviews.creation_date}}</p>
-                                <p>Last Modified: {{ reviews.last_mod }}</p>
-                                <br>
-                                <cite>{{ reviews.review }}</cite>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
+    
+    {% for review in reviews %}
+        <div class="mt-2 profile">
+            <div class="d-block">
+                <div class="col-sm-12  mt-3 mb-3 d-flex review" >
+                    <img src="{{ review.cover }}" alt="Book Cover" class="col-sm-12 col-md-3 book-cover ">
+                    <div class="d-flex">
+                        <div class="">
+                            <h4 class="result-text">{{ review.title }}</h4>
+                            <h5 class="result-text">{{ review.author }}</h5>
+                            <span class="result-text">Review by: {{ review.user }} </span>
+                            <p class="result-text">Created: {{ review.creation_date }}</p>
+                            <p class="result-text">Last Modified: {{ review.last_mod }}</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Modal For Book Info -->
-                <div class="modal fade" id="BookReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="BookReviewModalLabel">{{ reviews.title }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Review by: {{ reviews.user }} </p>
-                                <p>Created: {{ reviews.creation_date}}</p>
-                                <p>Last Modified: {{ reviews.last_mod }}</p>
-                                <br>
-                                <cite>{{ reviews.review }}</cite>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
+                    <br>
                 </div>
             </div>
-        </div>
+            <div class="d-block col-sm-12">
+                <cite class="result-text my-auto text-center">{{ review.review }}</cite>
+                <br>
+            </div>
+        </div> 
     {% endfor %}
-</div> 
+
 {% endblock %}

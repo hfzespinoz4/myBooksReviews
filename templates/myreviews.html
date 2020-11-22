@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
     <h1 class="text-center">My Reviews</h1>
+     <br>
+    <div class="mx-auto col-sm-12 col-md-8">
+        <button class="btn btn-outline-success my-2 my-sm-0 text-center d-flex mx-auto" type="submit">Create Review!</button>
+    </div>
     <div>
        {% for myreviews in myreviews %}
         <div class="col-sm-12 col-md-3 card">
             <img src="{{ myreviews.cover }}" alt="Book Cover" height="250rem" width="100%">
-            <div class="mx-auto">
+            <div class="mx-auto" width="500rem">
                 <h4 class="text-center card-text">{{ myreviews.title }}</h4>
                 <h5 class="text-center card-text">{{ myreviews.author }}</h5>
                 <p class="mx-auto card-text">Review by: {{ myreviews.user }} </p>

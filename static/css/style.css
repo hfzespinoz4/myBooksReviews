@@ -1,24 +1,27 @@
 .profile{
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(170, 225, 243, 0.5);
 }
 
-.profile-container{
-    background-color:blue;
+.book-cover{
+    height: 15rem;
+    width: 9rem;
+    padding: 0;
 }
 
 .profile-element{
-    margin: 0;
+    margin: 0;   
 }
 
 .container{
-    height:90%;
-    
+    height:90%;   
 }
 
-.card-element{
+.results-text{
     margin: 0;
+    padding: 0;
 }
 
-body{
-    background-color: blue;
+.review{
+    padding-left:0;
+    padding-right:0;
 }

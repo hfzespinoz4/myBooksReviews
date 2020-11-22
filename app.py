@@ -30,7 +30,6 @@ def get_reviews():
 
 @app.route("/myreviews")
 def get_myreviews():
-    # reviews = mongo.db.reviews.find()
     usr = session["user"]
     myreviews = list(mongo.db.reviews.find({"user": usr}))
     return render_template("myreviews.html", myreviews=myreviews)
