@@ -40,11 +40,6 @@ def get_profile():
     return render_template("profile.html", users=users)
 
 
-@app.route("/logout")
-def get_logout():
-    return render_template("logout.html")
-
-
 @app.route("/register", methods=["GET", "POST"])
 def get_register():
     if request.method == "POST":
@@ -103,7 +98,19 @@ def profile(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("profile.html", username=username)
+
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return redirect(url_for("get_login"))
+
+
+@app.route("/logout")
+def get_logout():
+    # Removing user from session cookie
+    flash("You have logged out")
+    session.pop("user")
+    return redirect(url_for("get_login"))
 
 
 if __name__ == "__main__":
