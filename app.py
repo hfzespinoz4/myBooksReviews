@@ -37,8 +37,9 @@ def get_myreviews():
 
 @app.route("/profile")
 def get_profile():
-    users = mongo.db.users.find()
-    return render_template("profile.html", users=users)
+    usr = session["user"]
+    profile = mongo.db.users.find({"user": usr})
+    return render_template("profile.html", profile=profile)
 
 
 @app.route("/register", methods=["GET", "POST"])

@@ -5,10 +5,10 @@
     <br>
     
     {% for review in reviews %}
-        <div class="mt-2 profile">
+        <div class="mt-2 profile card">
             <div class="d-block">
-                <div class="col-sm-12  mt-3 mb-3 d-flex review" >
-                    <img src="{{ review.cover }}" alt="Book Cover" class="col-sm-12 col-md-3 book-cover ">
+                <div class="col-sm-12 col-md-5 mt-3 mb-3 d-flex review">
+                    <img src="{{ review.cover }}" alt="Book Cover" class="col-sm-4 col-md-4 book-cover ">
                     <div class="d-flex">
                         <div class="">
                             <h4 class="result-text">{{ review.title }}</h4>
@@ -27,5 +27,7 @@
             </div>
         </div> 
     {% endfor %}
+
+    
 
 {% endblock %}

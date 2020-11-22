@@ -2,20 +2,75 @@
 {% block content %}
     <h1 class="text-center">My Reviews</h1>
      <br>
-    <div class="mx-auto col-sm-12 col-md-8">
-        <button class="btn btn-outline-success my-2 my-sm-0 text-center d-flex mx-auto" type="submit">Create Review!</button>
-    </div>
+    <button type="button" class="btn btn-primary text-center d-flex my-2 mx-auto" data-toggle="modal" data-target="#exampleModal">
+    Create Review
+    </button>
     <div>
-       {% for myreviews in myreviews %}
-        <div class="col-sm-12 col-md-3 card">
-            <img src="{{ myreviews.cover }}" alt="Book Cover" height="250rem" width="100%">
-            <div class="mx-auto" width="500rem">
-                <h4 class="text-center card-text">{{ myreviews.title }}</h4>
-                <h5 class="text-center card-text">{{ myreviews.author }}</h5>
-                <p class="mx-auto card-text">Review by: {{ myreviews.user }} </p>
-                <p class="mx-auto card-text">Created: {{ myreviews.creation_date }}</p>
+       {% for myreview in myreviews %}
+        <div class="mt-2 profile card" id="{{ myreview.id }}">
+            <div class="d-block">
+                <div class="col-sm-12 col-md-5 mt-3 mb-3 d-flex review" >
+                    <img src="{{ myreview.cover }}" alt="Book Cover" class="col-sm-4 col-md-4 book-cover ">
+                    <div class="d-flex">
+                        <div class="">
+                            <h4 class="result-text">{{ myreview.title }}</h4>
+                            <h5 class="result-text">{{ myreview.author }}</h5>
+                            <span class="result-text">Review by: {{ myreview.user }} </span>
+                            <p class="result-text">Created: {{ myreview.creation_date }}</p>
+                            <p class="result-text">Last Modified: {{ myreview.last_mod }}</p>
+                            <div class="d-flex">
+                            {{ myreview.id }}
+                                <button class="btn btn-primary text-center d-flex my-2 mx-auto">Modify</button>
+                                <button class="btn btn-primary text-center d-flex my-2 mx-auto">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div class="d-block col-sm-12">
+                <cite class="result-text my-auto text-center">{{ myreview.review }}</cite>
+                <br>
+            </div>
+        </div> 
+        {% endfor %}
+    </div> 
+
+    <!-- Create Review Modal Form -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Title:</label> 
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Author:</label> 
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Cover URL:</label> 
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Review:</label> 
+                            <textarea name="about" id="about" cols="30" rows="2" class="form-control" aria-required=""></textarea>
+                        </div>
+                        <input type="submit" value="Create Review" class="btn btn-primary text-center mx-auto">
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
-        {% endfor %}
     </div>
 {% endblock %}
