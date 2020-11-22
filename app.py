@@ -1,6 +1,6 @@
 import os
 from flask import (
-    Flask, flash, render_template, 
+    Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -59,13 +59,15 @@ def get_register():
         register = {
             "email": request.form.get("register-email"),
             "username": request.form.get("register-username").lower(),
-            "password": generate_password_hash(request.form.get("register-password"))
+            "password": generate_password_hash(
+                request.form.get("register-password"))
         }
         mongo.db.users.insert_one(register)
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("register-username").lower()
         flash("Registration Succesful")
+        return redirect(url_for("profile", username=session["user"]))
     return render_template("register.html")
 
 
@@ -80,17 +82,29 @@ def get_login():
             # Verify hashed password matches with db record
             if check_password_hash(
                 existing_user["password"], request.form.get("login-password")):
-                    session["user"] = request.form.get("login-username").lower()
-                    flash("Welcome, {}" .format(request.form.get("login-username")))
+                session["user"] = request.form.get("login-username").lower()
+                flash("Welcome, {}" .format(
+                    request.form.get("login-username")))
+                return redirect(url_for(
+                    "profile", username=session["user"]))
             else:
                 # Invalid Password
                 flash("Incorrect Username and/or Password, please verify")
-                return redirect(url_for("get_login"))        
+                return redirect(url_for("get_login"))
         else:
             # usernae doesn´t exist
-            flash ("Incorrect Username and/or Password, please verify")
+            flash("Incorrect Username and/or Password, please verify")
             return redirect(url_for("get_login"))
     return render_template("login.html")
+
+
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username):
+    # grab the session user's username from db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    return render_template("profile.html", username=username)
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
