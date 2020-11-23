@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import date
 if os.path.exists("env.py"):
     import env
 
@@ -40,6 +41,23 @@ def get_profile():
     usr = session["user"]
     profile = mongo.db.users.find({"user": usr})
     return render_template("profile.html", profile=profile)
+
+
+@pp.route("/create-review", methods=["GET", "POST"])
+def create_review():
+    newreview = {
+        "title": request.form.get("register-email"),
+        "author": request.form.get("register-username").lower(),
+        "cover": generate_password_hash(
+        "user":"hzunigaes"
+        "creation_date: "10/10/2020"
+        "last_mod:"10/10/2020"
+        "review:"Este libro es tremendo!"
+        "active:"true
+        }
+        mongo.db.reviews.insert_one(newreview)
+
+    }
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -113,6 +131,8 @@ def get_logout():
     flash("You have logged out")
     session.pop("user")
     return redirect(url_for("get_login"))
+
+
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 {% block content %}
     <h1 class="text-center">My Reviews</h1>
      <br>
-    <button type="button" class="btn btn-primary text-center d-flex my-2 mx-auto" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-success text-center d-flex my-2 mx-auto" data-toggle="modal" data-target="#exampleModal">
     Create Review
     </button>
     <div>
@@ -19,9 +19,11 @@
                             <p class="result-text">Created: {{ myreview.creation_date }}</p>
                             <p class="result-text">Last Modified: {{ myreview.last_mod }}</p>
                             <div class="d-flex">
-                            {{ myreview.id }}
-                                <button class="btn btn-primary text-center d-flex my-2 mx-auto">Modify</button>
-                                <button class="btn btn-primary text-center d-flex my-2 mx-auto">Delete</button>
+                            {{ myreview._id }}
+
+
+                                <button class="btn btn-success text-center d-flex my-2 mx-auto">Modify</button>
+                                <button class="btn btn-success text-center d-flex my-2 mx-auto">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -50,19 +52,19 @@
                     <form>
                         <div class="form-group">
                             <label>Title:</label> 
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="new-title" name="new-title">
                         </div>
                         <div class="form-group">
                             <label>Author:</label> 
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="new-author" name="new-author">
                         </div>
                         <div class="form-group">
                             <label>Cover URL:</label> 
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="new-cover" name="new-cover">
                         </div>
                         <div class="form-group">
                             <label>Review:</label> 
-                            <textarea name="about" id="about" cols="30" rows="2" class="form-control" aria-required=""></textarea>
+                            <textarea name="new-review" id="new-review" cols="30" rows="2" class="form-control" aria-required=""></textarea>
                         </div>
                         <input type="submit" value="Create Review" class="btn btn-primary text-center mx-auto">
 
