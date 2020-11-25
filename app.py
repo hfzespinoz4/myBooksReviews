@@ -43,21 +43,21 @@ def get_profile():
     return render_template("profile.html", profile=profile)
 
 
-@pp.route("/create-review", methods=["GET", "POST"])
+@app.route("/create-review", methods=["GET", "POST"])
 def create_review():
+    today = date.today()
     newreview = {
-        "title": request.form.get("register-email"),
-        "author": request.form.get("register-username").lower(),
-        "cover": generate_password_hash(
-        "user":"hzunigaes"
-        "creation_date: "10/10/2020"
-        "last_mod:"10/10/2020"
-        "review:"Este libro es tremendo!"
-        "active:"true
-        }
-        mongo.db.reviews.insert_one(newreview)
-
+        "title": request.form.get("new-email"),
+        "author": request.form.get("new-author"),
+        "cover": request.form.get("new-cover"),
+        "user": session["user"],
+        "creation_date": today.strftime("%d/%m/%Y"),
+        "last_mod": today.strftime("%d/%m/%Y"),
+        "review": request.form.get("new-review"),
+        "active": "true"
     }
+    mongo.db.reviews.insert_one(newreview)
+    return render_template("myreviews.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -131,8 +131,6 @@ def get_logout():
     flash("You have logged out")
     session.pop("user")
     return redirect(url_for("get_login"))
-
-
 
 
 if __name__ == "__main__":
