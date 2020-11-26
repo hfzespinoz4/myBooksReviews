@@ -14,35 +14,37 @@
       
             <div class="row">
                 <!-- Form containing user profile information -->
-                <form class="mt-1 col-sm-12">
+                <form class="mt-1 col-sm-12" method="POST" action="{{ url_for('create_review') }}">
                     <!-- About Me Field  -->
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="about">About Me</label>
-                        <textarea name="about" id="about" cols="30" rows="2" class="form-control" aria-required=""></textarea>
+                        <textarea name="about" id="about" cols="30" rows="2" class="form-control" aria-required="">
+                            {{ user.about}}
+                        </textarea>
                     </div>
                     
                     <!-- First Name Field  -->
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="fname" class="col-sm-3">First Name:</label>
-                        <input type="text" id="fname" name="fname" class="form-control" required>
+                        <input type="text" id="fname" name="fname" class="form-control" value="{{ user.fname }}" required>
                     </div>
 
                     <!-- Last Name Field  -->
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="lname" class="col-sm-3">Last Name:</label>
-                        <input type="text" id="lname" name="lname" class="form-control" required>
+                        <input type="text" id="lname" name="lname" class="form-control" value="{{ user.lname }}"  required>
                     </div>
                        
                     <!-- Username Field  -->
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="uname" class="col-sm-3">Username:</label>
-                        <input type="text" id="uname" name="uname" class="form-control" required>
+                        <input type="text" id="uname" name="uname" class="form-control" value="{{ user.username }}"  required>
                     </div>  
                     
                     <!-- Password Field  -->
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="password" class="col-sm-3">Password:</label>
-                        <input type="password" id="password" name="password" class="form-control" required>
+                        <input type="password" id="password" name="password" class="form-control" value="{{ user.password }}"  required>
                     </div>
                     <button type="submit" class="btn btn-primary d-flex mx-auto">Save Changes</button>
                     <br>

@@ -33,7 +33,10 @@ def get_reviews():
 def get_myreviews():
     usr = session["user"]
     myreviews = list(mongo.db.reviews.find({"user": usr}))
-    return render_template("myreviews.html", myreviews=myreviews)
+    if usr == "":
+        return render_template("login.html")
+    else:
+        return render_template("myreviews.html", myreviews=myreviews)
 
 
 @app.route("/profile")
@@ -43,11 +46,19 @@ def get_profile():
     return render_template("profile.html", profile=profile)
 
 
+@app.route("/edit_review/<review_id>", methods=["GET", "POST"])
+def edit_review(review_id):
+    review = mongo.db.reviews.find_one({"id": ObjectId(review_id)})
+    return render_template("editreview.html", review=review)
+
+
 @app.route("/create-review", methods=["GET", "POST"])
 def create_review():
+    usr = session["user"]
+    myreviews = list(mongo.db.reviews.find({"user": usr}))
     today = date.today()
     newreview = {
-        "title": request.form.get("new-email"),
+        "title": request.form.get("new-title"),
         "author": request.form.get("new-author"),
         "cover": request.form.get("new-cover"),
         "user": session["user"],
@@ -57,7 +68,7 @@ def create_review():
         "active": "true"
     }
     mongo.db.reviews.insert_one(newreview)
-    return render_template("myreviews.html")
+    return render_template("myreviews.html", myreviews=myreviews)
 
 
 @app.route("/register", methods=["GET", "POST"])
