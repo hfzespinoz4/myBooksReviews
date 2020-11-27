@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="profile-container">
-        <h2 class="text-4 text-center"> {{ usr}} Profile</h2>
+        <h2 class="text-4 text-center">  Profile</h2>
         <div class="col-sm-12 col-md-8 mx-auto profile">
             <div class="pt-2">
                 <img class="d-flex col-sm-5 mx-auto" src="https://www.clipartkey.com/mpngs/b/301-3011907_helping-the-poor-and-needy-clipart.png" alt="Profile Image" height="160px" width="160px">
@@ -19,7 +19,7 @@
                     <div class="form-group col-sm-12 mx-auto">
                         <label for="about">About Me</label>
                         <textarea name="about" id="about" cols="30" rows="2" class="form-control" aria-required="">
-                            {{ user.about}}
+                            {{- user.about -}}
                         </textarea>
                     </div>
                     

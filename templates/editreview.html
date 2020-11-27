@@ -1,25 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
     <div>
+        <!-- Edit Review Component  -->
         <h1 class="text-center mt-2">Edit Review</h1>
         <br>
         <form class="mx-auto col-sm-12 col-md-8" method="POST" action="{{ url_for('edit_review', review_id=review._id) }}">
+            <!-- Book Title Field  -->
             <div class="form-group">
                 <label>Title:</label> 
                 <input type="text" class="form-control" id="editreview-title" name="editreview-title" placeholder="{{ review.title }}">
             </div>
+
+            <!-- Author Name Field  -->
             <div class="form-group">
                 <label>Author:</label> 
                 <input type="text" class="form-control" id="editreview-author" name="editreview-author" value="{{ review.author }}">
             </div>
+
+            <!-- Cover URL Field -->
             <div class="form-group">
                 <label>Cover URL:</label> 
                 <input type="text" class="form-control" id="editreview-cover" name="editreview-cover" value="{{ review.cover }}">
             </div>
+
+            <!-- Book Review Field  -->
             <div class="form-group">
                 <label>Review:</label> 
                 <textarea name="editreview-review" id="editreview-review" cols="30" rows="2" class="form-control" aria-required="">{{- review.review -}}"</textarea>
             </div>
+            <!-- Avtion Buttons -->
             <div class="d-flex mx-auto">
                 <a href="{{url_for('get_myreviews')}}" class="btn btn-success text-center mx-1">Cancel</a>
                 <input type="submit" value="Edit Review" class="btn btn-success text-center mx-1">

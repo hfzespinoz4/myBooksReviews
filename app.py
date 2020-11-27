@@ -39,13 +39,6 @@ def get_myreviews():
         return render_template("myreviews.html", myreviews=myreviews)
 
 
-@app.route("/profile")
-def get_profile():
-    usr = session["user"]
-    profile = mongo.db.users.find({"user": usr})
-    return render_template("profile.html", profile=profile)
-
-
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
     if request.method == "POST":
@@ -59,7 +52,7 @@ def edit_review(review_id):
         }
         mongo.db.reviews.update({"_id": ObjectId(review_id)}, submit)
         flash("Review Successfully Updated")
-    
+
     review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
     return render_template("editreview.html", review=review)
 
@@ -105,7 +98,7 @@ def get_register():
         # put the new user into 'session' cookie
         session["user"] = request.form.get("register-username").lower()
         flash("Registration Succesful")
-        return redirect(url_for("profile", username=session["user"]))
+        return redirect(url_for("get_reviews"))
     return render_template("register.html")
 
 

@@ -16,17 +16,20 @@
         {% endblock %}
     </head>
     <body class="container">
+        <!-- Header Section  -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!-- Logo Section  -->
                 <a class="navbar-brand" href="{{ url_for('get_reviews') }}">myBooksReviews</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <!-- Navbar Menu -->
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
                         <a class="nav-link" href="{{ url_for('get_reviews') }}">Reviews </a>
                         <a class="nav-link" href="{{ url_for('get_myreviews') }}">MyReviews</a>
-                        <a class="nav-link" href="{{ url_for('get_profile') }}">Profile</a>
                         <a class="nav-link" href="{{ url_for('get_register') }}">Register</a>
                         <a class="nav-link" href="{{ url_for('get_login') }}">Log In</a>
                         <a class="nav-link" href="{{ url_for('get_logout') }}">Log Out</a>
@@ -34,17 +37,21 @@
                 </div>
             </nav>
         </header>
+
+        <!-- Flash Messages Section  -->
         <section>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert alert-warning text-center" role="alert">
-                             {{ message }}
+                            {{ message }}
                         </div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
         </section>
+
+        <!-- Main or Content Section  -->
         <main>
             <div>
                 <div class="row">
@@ -56,6 +63,8 @@
                 </div>
             </div>
         </main>
+
+        <!-- Footer Section -->
         <footer class="mt-2">
             <div class="row justify-content-between">
                 <div class="col-12 col-sm-12">
@@ -75,10 +84,10 @@
                             </a>
                         </li>
               
-                        <!-- Contact Link -->
+                        <!-- Facebook Page Link -->
                         <li class="mx-3 hvr-bounce-in">
-                            <a class="review-button" target="_blank" href="https://github.com/hfzespinoz4">
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <a class="review-button" target="_blank" href="https://facebook.com/hzunigae">
+                                <i class="fas fa-facebook" aria-hidden="true"></i>
                             </a>
                         </li>
                     </ul>
