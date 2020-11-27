@@ -1,78 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1 class="text-center">My Reviews</h1>
-     <br>
-    <button type="button" class="btn btn-success text-center d-flex my-2 mx-auto" data-toggle="modal" data-target="#exampleModal">
-    Create Review
-    </button>
-    <div class="">
-       {% for myreview in myreviews %}
-        <div class="mt-2 profile card col-sm-12 mx-1" id="{{ myreview._id }}">
-            <div class="d-block">
-                <div class="col-sm-12 col-md-8 mt-3 mb-3 d-flex review" >
-                    <img src="{{ myreview.cover }}" alt="Book Cover" class="col-sm-4 col-md-4 book-cover ">
-                    <div class="d-flex">
-                        <div>
-                            <h4 class="result-text">{{ myreview.title }}</h4>
-                            <h5 class="result-text">{{ myreview.author }}</h5>
-                            <span class="result-text">Review by: {{ myreview.user }} </span>
-                            <p class="result-text">Created: {{ myreview.creation_date }}</p>
-                            <p class="result-text">Last Modified: {{ myreview.last_mod }}</p>
-                            <div class="d-flex">
-                                <button class="btn btn-success review-button text-center d-flex my-2 mx-1">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger review-button text-center d-flex my-2 mx-1">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                </div>
+    <div>
+        <h1 class="text-center mt-2">Edit Review</h1>
+        <br>
+        <form class="mx-auto col-sm-12 col-md-8" method="POST" action="{{ url_for('edit_review', review_id=review._id) }}">
+            <div class="form-group">
+                <label>Title:</label> 
+                <input type="text" class="form-control" id="editreview-title" name="editreview-title" placeholder="{{ review.title }}">
             </div>
-            <div class="d-block col-sm-12">
-                <cite class="result-text my-auto text-center">{{ myreview.review }}</cite>
-                <br>
+            <div class="form-group">
+                <label>Author:</label> 
+                <input type="text" class="form-control" id="editreview-author" name="editreview-author" value="{{ review.author }}">
             </div>
-        </div> 
-        {% endfor %}
-    </div> 
-
-    <!-- Create Review Modal Form -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ url_for('create_review') }}">
-                        <div class="form-group">
-                            <label>Title:</label> 
-                            <input type="text" class="form-control" id="new-title" name="new-title">
-                        </div>
-                        <div class="form-group">
-                            <label>Author:</label> 
-                            <input type="text" class="form-control" id="new-author" name="new-author">
-                        </div>
-                        <div class="form-group">
-                            <label>Cover URL:</label> 
-                            <input type="text" class="form-control" id="new-cover" name="new-cover">
-                        </div>
-                        <div class="form-group">
-                            <label>Review:</label> 
-                            <textarea name="new-review" id="new-review" cols="30" rows="2" class="form-control" aria-required=""></textarea>
-                        </div>
-                        <input type="submit" value="Create Review" class="btn btn-primary text-center mx-auto">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                </div>
+            <div class="form-group">
+                <label>Cover URL:</label> 
+                <input type="text" class="form-control" id="editreview-cover" name="editreview-cover" value="{{ review.cover }}">
             </div>
-        </div>
+            <div class="form-group">
+                <label>Review:</label> 
+                <textarea name="editreview-review" id="editreview-review" cols="30" rows="2" class="form-control" aria-required="">{{- review.review -}}"</textarea>
+            </div>
+            <div class="d-flex mx-auto">
+                <a href="{{url_for('get_myreviews')}}" class="btn btn-success text-center mx-1">Cancel</a>
+                <input type="submit" value="Edit Review" class="btn btn-success text-center mx-1">
+            </div>
+        </form>
     </div>
 {% endblock %}

@@ -19,12 +19,14 @@
                             <p class="result-text">Created: {{ myreview.creation_date }}</p>
                             <p class="result-text">Last Modified: {{ myreview.last_mod }}</p>
                             <div class="d-flex">
-                                <button class="btn btn-success review-button text-center d-flex my-2 mx-1">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger review-button text-center d-flex my-2 mx-1">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                {% if session.user|lower == myreview.user|lower %}
+                                    <a href="{{ url_for('edit_review', review_id=myreview._id)}} "class="btn btn-success review-button text-center d-flex my-2 mx-1">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button class="btn btn-danger review-button text-center d-flex my-2 mx-1">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -44,7 +46,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create Review</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
