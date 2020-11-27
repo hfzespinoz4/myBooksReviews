@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <!-- Reviews Component  -->
     <h1 class="text-center">Reviews</h1>
-   
     <br>
-    
     {% for review in reviews %}
+
+        <!-- container for each review  -->
         <div class="mt-2 profile card">
             <div class="d-block">
+
+                <!-- Book cover and details container  -->
                 <div class="col-sm-12 col-md-5 mt-3 mb-3 d-flex review">
                     <img src="{{ review.cover }}" alt="Book Cover" class="col-sm-4 col-md-4 book-cover ">
+                    
+                    <!-- Review Details  -->
                     <div class="d-flex">
                         <div class="">
                             <h4 class="result-text">{{ review.title }}</h4>
@@ -21,13 +27,12 @@
                     <br>
                 </div>
             </div>
+
+            <!-- Review Description  -->
             <div class="d-block col-sm-12">
                 <cite class="result-text my-auto text-center">{{ review.review }}</cite>
                 <br>
             </div>
         </div> 
     {% endfor %}
-
-    
-
 {% endblock %}

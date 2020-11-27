@@ -23,15 +23,18 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+# load reviews in database
 @app.route("/reviews")
 def get_reviews():
     reviews = list(mongo.db.reviews.find())
     return render_template("reviews.html", reviews=reviews)
 
 
+# Show reviews created by current user
 @app.route("/myreviews")
 def get_myreviews():
     usr = session["user"]
+    # search for current user review in database
     myreviews = list(mongo.db.reviews.find({"user": usr}))
     if usr == "":
         return render_template("login.html")
@@ -39,9 +42,12 @@ def get_myreviews():
         return render_template("myreviews.html", myreviews=myreviews)
 
 
+# edit review function
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
+    # validate method
     if request.method == "POST":
+        # get system date
         today = date.today()
         submit = {
             "title": request.form.get("editreview-title"),
@@ -50,18 +56,24 @@ def edit_review(review_id):
             "last_mod": today.strftime("%d/%m/%Y"),
             "review": request.form.get("editreview-review")
         }
+        # edit review in database
         mongo.db.reviews.update({"_id": ObjectId(review_id)}, submit)
+        # display confirmation message
         flash("Review Successfully Updated")
 
     review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
     return render_template("editreview.html", review=review)
 
 
+# Create review function
 @app.route("/create-review", methods=["GET", "POST"])
 def create_review():
+    # get username from session cookie
     usr = session["user"]
     myreviews = list(mongo.db.reviews.find({"user": usr}))
+    # get system date
     today = date.today()
+
     newreview = {
         "title": request.form.get("new-title"),
         "author": request.form.get("new-author"),
@@ -72,10 +84,12 @@ def create_review():
         "review": request.form.get("new-review"),
         "active": "true"
     }
+    # insert review in database
     mongo.db.reviews.insert_one(newreview)
     return render_template("myreviews.html", myreviews=myreviews)
 
 
+# User registration function
 @app.route("/register", methods=["GET", "POST"])
 def get_register():
     if request.method == "POST":
@@ -83,10 +97,12 @@ def get_register():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("register-username").lower()})
 
+        # If user is registered reload page
         if existing_user:
             flash("Username already exists")
             return redirect(url_for("get_register"))
 
+        # If user isn´t registered create new user
         register = {
             "email": request.form.get("register-email"),
             "username": request.form.get("register-username").lower(),
@@ -102,6 +118,7 @@ def get_register():
     return render_template("register.html")
 
 
+# Login function
 @app.route("/login", methods=["GET", "POST"])
 def get_login():
     if request.method == "POST":
@@ -129,6 +146,7 @@ def get_login():
     return render_template("login.html")
 
 
+# display profile function
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db
@@ -141,6 +159,7 @@ def profile(username):
     return redirect(url_for("get_login"))
 
 
+# Logout function
 @app.route("/logout")
 def get_logout():
     # Removing user from session cookie
@@ -149,10 +168,14 @@ def get_logout():
     return redirect(url_for("get_login"))
 
 
+# Delete Review function
 @app.route("/delete_review/<review_id>")
 def delete_review(review_id):
+    # delete review with an specific id
     mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+    # show confirmation message
     flash("Review Successfully Deleted!")
+    # render reviews page
     return redirect(url_for("get_reviews"))
 
 

@@ -1,31 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
+    <!-- Register Component -->
     <h1 class="display-4 text-center">Register</h1>
     <div class="col-sm-8 mt-3 mx-auto">
+
+        <!-- Register User Form  -->
         <form class="col-sm-12 profile card" method="POST" action="{{ url_for('get_register') }}">
+            
+            <!-- Email input Field  -->
             <div class="form-group">
                 <label for="register-email">Email:</label>
                 <input type="email" id="register-email" name="register-email" placeholder="name@company.com" class="form-control" required>
             </div>
+            
+            <!-- Username input field  -->
             <div class="form-group">
                 <label for="register-username">Username: </label>
                 <input type="text" id="register-username" name="register-username" placeholder="username" class="form-control" required>
             </div>
+
+            <!-- Password input field  -->
             <div class="form-group">
                 <label for="register-password">Password:</label>
                 <input type="password" id="register-password" name="register-password" placeholder="your password" class="form-control" minlength="5"
                             maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
             </div>
+
+            <!-- Password validation field  -->
             <div class="form-group">
                 <label for="register-passwordval">Repeat Your Password:</label>
                 <input type="password" id="register-passwordval" name="register-passwordval" placeholder="your password" class="form-control" minlength="5"
                             maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
             </div>
             <br>    
+
+            <!-- Submit Button  -->
             <input type="submit" value="Register" class="form-control btn btn-success col-sm-6 text-center d-flex mx-auto mb-2">
             <br>
         </form>
         <br>
+
+        <!-- Link to Login Page if the user if already registered  -->
         <div>
             <p class="text-center"> Already Registered?
                 <a href="{{ url_for('get_register') }}" class="">Login</a>
